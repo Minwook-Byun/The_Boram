@@ -75,3 +75,4 @@ typings/
 # FuseBox cache
 .fusebox/
 src/firebase/config.js
+src/assets/bible.svg
