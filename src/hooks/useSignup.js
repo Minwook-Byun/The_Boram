@@ -34,7 +34,7 @@ export const useSignup = () => {
       // 사용자 이름 업데이트
       await res.user.updateProfile({ displayName, photoURL: imgUrl });
 
-      // 유저용 document 만들기
+      // 유저용 document 만들기 => 컬렉션이 없다면 하나는 만들어줘야 하나??
       await projectFirestore.collection("users").doc(res.user.uid).set({
         online: true,
         displayName: displayName,
