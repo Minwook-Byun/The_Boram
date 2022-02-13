@@ -6,13 +6,25 @@ import "./Sidebar.css";
 import DashboardIcon from "../assets/dashboard_icon.svg";
 import AddIcon from "../assets/add_icon.svg";
 
+// 컴포넌트
+import Avatar from "../components/Avatar";
+
+// hooks
+import { useAuthContext } from "../hooks/useAuthContext";
+
 const Sidebar = () => {
+  const { user } = useAuthContext();
   return (
     <div className="sidebar">
       <div className="sidebar-content">
         <div className="user">
-          {/* 아바타와 유저 이름이 추가될 영역 */}
-          <p>안녕하세요 ㅇㅇ님!</p>
+          {/* 프랍으로 넘겨주려면 user에서 또 받아와야 한다! */}
+          {user ? (
+            <>
+              <Avatar src={user.photoURL} />
+              <p>안녕하세요 {user.displayName}님!</p>
+            </>
+          ) : null}
         </div>
         <nav className="links">
           <ul>

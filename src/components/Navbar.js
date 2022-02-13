@@ -6,37 +6,47 @@ import { useLogout } from "../hooks/useLogout";
 import "./Navbar.css";
 
 // 이미지 파일
-// 로고
 import logo from "../assets/bible.svg";
+
+// hooks
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Navbar = () => {
   const { logout, isPending } = useLogout();
+  const { user } = useAuthContext();
 
   return (
     <div className="navbar">
       <ul>
+        {/* 유저에게 항상 보여줄 부분 */}
         <li className="logo">
-          <img src={logo} alt="로고 이미지" />
-          <span> 이름짓기가 젤 어렵다 </span>
+          {/* <img src={logo} alt="로고 이미지" /> */}
+          <span></span>
         </li>
-
-        <li>
-          <Link to="/login">로그인🔒</Link>
-        </li>
-        <li>
-          <Link to="/signup">회원가입</Link>
-        </li>
-        <li>
-          {isPending ? (
-            <button className="btn" onClick={logout}>
-              로그아웃 중입니다...
-            </button>
-          ) : (
-            <button className="btn" onClick={logout}>
-              로그아웃
-            </button>
-          )}
-        </li>
+        {user ? (
+          <>
+            <li>
+              {isPending ? (
+                <button className="btn" onClick={logout}>
+                  로그아웃 중입니다...
+                </button>
+              ) : (
+                <button className="btn" onClick={logout}>
+                  로그아웃
+                </button>
+              )}
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/login">로그인🔒</Link>
+            </li>
+            <li>
+              <Link to="/signup">회원가입</Link>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );
